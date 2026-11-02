@@ -68,6 +68,7 @@ Consider the following simple example:
 
 *Your Answer (take a picture and upload it):*
 
+![Recursion tree for MaxValue(3)](images/part3-recursion-tree.jpg)
 
 ## Part 4: Recurrence Relation
 
@@ -75,6 +76,17 @@ Consider the following simple example:
 
 *Your Answer:*
 
+Assuming positive integer weights and a nonnegative integer capacity, let $OPT(W)$ be the maximum total value achievable with weight at most $W$, allowing unlimited copies of each item. Then
+
+$$
+OPT(W)=
+\begin{cases}
+0, & W=0, \\
+\max\left(\{0\}\cup\{v_i+OPT(W-w_i)\mid 1\leq i\leq n,\ w_i\leq W\}\right), & W>0.
+\end{cases}
+$$
+
+The base case is 0 because no item fits in a knapsack of capacity 0. For each item $i$ that fits, choosing one copy contributes $v_i$ and leaves capacity $W-w_i$. The best additional value is $OPT(W-w_i)$, where all items, including item $i$, remain available. Taking the maximum over these choices gives the optimal value. Including 0 represents choosing nothing and ensures that $OPT(W)=0$ when no item fits. Since every weight is positive, each recursive subproblem has a smaller capacity.
 
 ## Part 5: Bottom-Up Dynamic Programming
 
@@ -82,18 +94,21 @@ Instead of using the slow recursive approach, we can build a table bottom-up.
 
 **Question:** Use your recurrence relation from Part 4 to fill in the following table for the example provided in Part 3 ($w_1=1, v_1=2$ and $w_2=2, v_2=5$). At each step, record the optimal value and the specific item chosen to achieve that value. 
 
+Using the two items explicitly listed in Part 5, the table is shown below. "Item Chosen" records one item selected at the current capacity; the remaining items come from the row for the remaining capacity. When both choices tie, choose Item 1.
+
 | Capacity ($W$) | Optimal Value ($OPT$) | Item Chosen |
 |:---:|:---|:---|
-| **0** | | |
-| **1** | | |
-| **2** | | |
-| **3** | | |
-| **4** | | |
-| **5** | | |
-| **6** | | |
+| **0** | 0 | None |
+| **1** | 2 | Item 1 |
+| **2** | 5 | Item 2 |
+| **3** | 7 | Item 1 |
+| **4** | 10 | Item 2 |
+| **5** | 12 | Item 1 |
+| **6** | 15 | Item 2 |
 
 *Explain how you calculated the row for $W=6$*
 
+Choosing Item 1 gives $2+OPT(5)=2+12=14$. Choosing Item 2 gives $5+OPT(4)=5+10=15$. Therefore, $OPT(6)=\max(0,14,15)=15$, and the recorded choice is Item 2.
 
 ## Part 6: Traceback
 
