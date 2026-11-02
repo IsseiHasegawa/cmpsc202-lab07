@@ -19,6 +19,18 @@ Suppose we're going hiking. We have items $1, \ldots, n$ that we could pack in m
 
 *Your Answer:*
 
+All three variations can be solved using dynamic programming because they have **optimal substructure** and **overlapping subproblems**. An optimal solution can be constructed from optimal solutions to smaller problems, and the answers to repeated subproblems can be stored and reused.
+
+1. **Maximize value with at most one of each item:** Define $DP(i,c)$ as the maximum value achievable using the first $i$ items with capacity $c$. For each item, compare excluding it with including it once. Both choices use only the first $i-1$ items for the remaining problem, preventing an item from being selected more than once.
+
+2. **Maximize value with multiple copies allowed:** Define $DP(c)$ as the maximum value achievable with capacity $c$. Choosing one copy of item $i$ adds value $v_i$ and leaves a smaller problem with capacity $c-w_i$. The same item remains available in that smaller problem, allowing repeated selections. Store the maximum value over all feasible choices.
+
+3. **Minimize weight while achieving at least value $V$:** Define $DP(t)$ as the minimum weight needed to achieve at least the remaining required value $t$. Choosing item $i$ adds weight $w_i$ and reduces the remaining requirement to $\max(0,t-v_i)$. Compare all choices and store the minimum weight, with $DP(0)=0$.
+
+Thus, changing the objective from maximization to minimization or allowing repeated items changes the states and transitions, but does not prevent dynamic programming from being used.
+
+These formulations assume positive integer weights and values. If "a positive integer" in variations 2 and 3 means that **at least one copy of every item is required**, first include one of each item and then apply DP to the remaining capacity or value requirement, provided the initial selection is feasible.
+
 ## Part 2: The Naive Recursive Algorithm
 
 Below is a naive recursive algorithm intended to solve one of the variations listed above.
