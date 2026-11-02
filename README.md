@@ -115,3 +115,11 @@ Choosing Item 1 gives $2+OPT(5)=2+12=14$. Choosing Item 2 gives $5+OPT(4)=5+10=1
 **Question:** Using the "Item Chosen" column from the table you completed in Part 5, trace back to find the exact quantities of each item to pack that maximize the value. What is the final optimal packing configuration for $W=6$ and the maximum value?
 
 *Your Answer:*
+
+Starting at $W=6$, follow the "Item Chosen" column:
+
+- $W=6$: Choose Item 2; remaining capacity $=6-2=4$.
+- $W=4$: Choose Item 2; remaining capacity $=4-2=2$.
+- $W=2$: Choose Item 2; remaining capacity $=2-2=0$.
+
+Therefore, the optimal packing is **0 copies of Item 1 and 3 copies of Item 2**, with total weight $3\times 2=6$ and maximum value $3\times 5=\boxed{15}$.
