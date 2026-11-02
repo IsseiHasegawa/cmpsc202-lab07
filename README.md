@@ -54,6 +54,8 @@ Function MaxValue(W):
 
 *Your Answer:*
 
+The algorithm solves **Variation 2**, interpreted as allowing unlimited copies of each item. It maximizes value by comparing $v_i + \text{MaxValue}(W-w_i)$ for every item that fits and returning the largest result. The condition $w_i \leq W$ prevents exceeding the capacity. Each recursive call considers all items again, so the same item can be selected repeatedly, unlike Variation 1. It does not solve Variation 3 because it maximizes value under a weight limit rather than minimizing weight to meet a value requirement. Strictly speaking, the code allows zero copies of an item; it does not require at least one of every item if "positive integer" is read literally.
+
 ## Part 3: Recursion Tree
 
 Consider the following simple example:
